@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const loginForm = document.getElementById("loginForm");
+  const submitBtn = document.getElementById("submitBtn"); // Get the submit button
 
   // Add submit event listener to the form
   loginForm.addEventListener("submit", function(event) {
@@ -11,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const rememberMe = document.getElementById("rememberMe").checked;
 
     if (rememberMe) {
-      // If "Remember me" is checked, save username and password to local storage
-      localStorage.setItem("username", username);
-      localStorage.setItem("password", password);
+      // If "Remember me" is checked, save username and password to session storage
+      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("password", password);
     } else {
-      // If "Remember me" is unchecked, remove username and password from local storage
-      localStorage.removeItem("username");
-      localStorage.removeItem("password");
+      // If "Remember me" is unchecked, remove username and password from session storage
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("password");
     }
 
     // Display an alert with the logged-in message
@@ -25,13 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Check if there are stored credentials
-  const storedUsername = localStorage.getItem("username");
-  const storedPassword = localStorage.getItem("password");
+  const storedUsername = sessionStorage.getItem("username");
+  const storedPassword = sessionStorage.getItem("password");
 
   // If there are stored credentials, fill the form
   if (storedUsername && storedPassword) {
     document.getElementById("username").value = storedUsername;
-    document.getElementById("password").value = storedPassword;
-    document.getElementById("rememberMe").checked = true;
-  }
-});
+    document.getElementById
