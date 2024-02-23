@@ -1,25 +1,32 @@
-//your JS code here. If required.
-document.addEventListner("submit",function(event){
-	event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("loginForm");
 
-    const username=document.getElementById("username");
-	const password=document.getElementById("password");
-	const rememberme=document.getElementById("checkbox").checked;
+  // Add submit event listener to the form
+  loginForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting
 
-	if(rememberme)
-	{
-		localStorage.setItem("username",username);
-		localStorage.setItem("password",password);
-		
-	}
-	else
-	{
-		localStorage.removeItem("username");
-		localStorage.removeItem("password");	
-	}
-	alert("Logged in as: " + username);
-	const storedUsername = localStorage.getItem("username");
-    const storedPassword = localStorage.getItem("password");
+    // Get the values of username, password, and rememberMe checkbox
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const rememberMe = document.getElementById("rememberMe").checked;
+
+    if (rememberMe) {
+      // If "Remember me" is checked, save username and password to local storage
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+    } else {
+      // If "Remember me" is unchecked, remove username and password from local storage
+      localStorage.removeItem("username");
+      localStorage.removeItem("password");
+    }
+
+    // Display an alert with the logged-in message
+    alert("Logged in as: " + username);
+  });
+
+  // Check if there are stored credentials
+  const storedUsername = localStorage.getItem("username");
+  const storedPassword = localStorage.getItem("password");
 
   // If there are stored credentials, fill the form
   if (storedUsername && storedPassword) {
@@ -28,22 +35,3 @@ document.addEventListner("submit",function(event){
     document.getElementById("rememberMe").checked = true;
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						 
-	)
